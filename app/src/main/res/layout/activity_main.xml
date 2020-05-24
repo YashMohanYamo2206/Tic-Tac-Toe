@@ -39,7 +39,8 @@
         </Button>
 
         <Button
-
+            android:onClick="singlePlayer"
+            android:text="Single player"
             android:layout_width="300sp"
             android:layout_height="80sp">
 

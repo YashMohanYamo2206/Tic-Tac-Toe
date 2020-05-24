@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.media.MediaPlayer;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import java.util.Locale;
+
+import static com.yash.spider_task_3.SinglePlayer.findBestMove;
 
 @SuppressLint("ViewConstructor")
 public class draw_cross_circle extends View {
@@ -50,25 +53,83 @@ public class draw_cross_circle extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
+        if (!MainActivity.isSinglePlayer) {
+            for (float i = 50; i < game_relativeLayout.getWidth() - 50; i += ((game_relativeLayout.getWidth() - 100) / 3f)) {
+                for (float j = game_relativeLayout.getHeight() / 4f; j < 3 * game_relativeLayout.getHeight() / 4f; j += (game_relativeLayout.getHeight() / 6f)) {
+                    int k = (int) ((i - 50) / ((game_relativeLayout.getWidth() - 100) / 3f));
+                    int l = (int) ((j - game_relativeLayout.getHeight() / 4f) / (game_relativeLayout.getHeight() / 6f));
 
-        for (float i = 50; i < game_relativeLayout.getWidth() - 50; i += ((game_relativeLayout.getWidth() - 100) / 3f)) {
-            for (float j = game_relativeLayout.getHeight() / 4f; j < 3 * game_relativeLayout.getHeight() / 4f; j += (game_relativeLayout.getHeight() / 6f)) {
-                int k = (int) ((i - 50) / ((game_relativeLayout.getWidth() - 100) / 3f));
-                int l = (int) ((j - game_relativeLayout.getHeight() / 4f) / (game_relativeLayout.getHeight() / 6f));
-
-                if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
-                    if (Game_Activity.count_moves % 2 == 0) {
-                        Game_Activity.moves[k][l] = 1;
-                        canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
-                        Game_Activity.count_moves++;
-                        checkWinner();
-                    } else if (Game_Activity.count_moves % 2 == 1) {
-                        Game_Activity.moves[k][l] = 2;
-                        canvas.drawLine(i + 50, j + 50, i + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, j + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
-                        canvas.drawLine(i + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, j + 50, i + 50, j + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
-                        Game_Activity.count_moves++;
-                        checkWinner();
+                    if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
+                        Toast.makeText(getContext(), k + " , " + l, Toast.LENGTH_SHORT).show();
+                        if (Game_Activity.count_moves % 2 == 0) {
+                            Game_Activity.moves[k][l] = 1;
+                            canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
+                            Game_Activity.count_moves++;
+                            checkWinner();
+                        } else if (Game_Activity.count_moves % 2 == 1) {
+                            Game_Activity.moves[k][l] = 2;
+                            canvas.drawLine(i + 50, j + 50, i + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, j + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(i + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, j + 50, i + 50, j + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            Game_Activity.count_moves++;
+                            checkWinner();
+                        }
                     }
+                }
+            }
+        } else {
+            if (Game_Activity.count_moves % 2 == 0) {
+                for (float i = 50; i < game_relativeLayout.getWidth() - 50; i += ((game_relativeLayout.getWidth() - 100) / 3f)) {
+                    for (float j = game_relativeLayout.getHeight() / 4f; j < 3 * game_relativeLayout.getHeight() / 4f; j += (game_relativeLayout.getHeight() / 6f)) {
+                        int k = (int) ((i - 50) / ((game_relativeLayout.getWidth() - 100) / 3f));
+                        int l = (int) ((j - game_relativeLayout.getHeight() / 4f) / (game_relativeLayout.getHeight() / 6f));
+
+                        if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
+                            if (Game_Activity.count_moves % 2 == 0) {
+                                Game_Activity.moves[k][l] = 1;
+                                canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
+                                Game_Activity.count_moves++;
+                                checkWinner();
+                                break;
+                            }
+                        }
+                    }
+                }
+                if (Game_Activity.count_moves % 2 == 1 && Game_Activity.count_moves <= 9) {
+                    SinglePlayer.Move move = findBestMove(Game_Activity.moves);
+                    if (move.row != -1 && move.col != -1 && Game_Activity.moves[move.row][move.col] == 0) {
+                        Game_Activity.moves[move.row][move.col] = 2;
+                        if (move.row == 0 && move.col == 0 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + 50, game_relativeLayout.getHeight() / 4f + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + 50, 50 + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 1 && move.col == 0 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + 50, 50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 2 && move.col == 0 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + 50, ((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + 50, 50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 0 && move.col == 1 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, 50 + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 1 && move.col == 1 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, 50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 2 && move.col == 1 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, ((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (game_relativeLayout.getHeight() / 6f) + 50, 50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 0 && move.col == 2 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 1 && move.col == 2) {
+                            canvas.drawLine(50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(50 + ((2f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + ((game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        } else if (move.row == 2 && move.col == 2 && Game_Activity.moves[move.row][move.col] != 1) {
+                            canvas.drawLine(50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, ((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                            canvas.drawLine(((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
+                        }
+                    }
+                    Toast.makeText(getContext(), move.row + " , " + move.col, Toast.LENGTH_SHORT).show();
+                    Game_Activity.count_moves++;
+                    checkWinner();
                 }
             }
         }
@@ -88,6 +149,7 @@ public class draw_cross_circle extends View {
                                 Toast.makeText(getContext(), "weird name", Toast.LENGTH_SHORT).show();
                             } else {
                                 if (k == 1) {
+
                                     tts.speak(Game_Activity.p1_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
                                 } else if (k == 2) {
                                     tts.speak(Game_Activity.p2_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
