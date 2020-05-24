@@ -60,7 +60,7 @@ public class draw_cross_circle extends View {
                     int l = (int) ((j - game_relativeLayout.getHeight() / 4f) / (game_relativeLayout.getHeight() / 6f));
 
                     if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
-                        Toast.makeText(getContext(), k + " , " + l, Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getContext(), k + " , " + l, Toast.LENGTH_SHORT).show();
                         if (Game_Activity.count_moves % 2 == 0) {
                             Game_Activity.moves[k][l] = 1;
                             canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
@@ -127,7 +127,7 @@ public class draw_cross_circle extends View {
                             canvas.drawLine(((3f * game_relativeLayout.getWidth() - 100) / 3f) - 50, game_relativeLayout.getHeight() / 4f + (2 * game_relativeLayout.getHeight() / 6f) + 50, 50 + ((2 * game_relativeLayout.getWidth() - 100) / 3f) + 50, game_relativeLayout.getHeight() / 4f + (3 * game_relativeLayout.getHeight() / 6f) - 50, p[1]);
                         }
                     }
-                    Toast.makeText(getContext(), move.row + " , " + move.col, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getContext(), move.row + " , " + move.col, Toast.LENGTH_SHORT).show();
                     Game_Activity.count_moves++;
                     checkWinner();
                 }
