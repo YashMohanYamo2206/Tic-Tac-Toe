@@ -310,8 +310,7 @@ public class draw_cross_circle extends View {
             dialog.setTitle("DRAW");
             dialog.setPositiveButton("NEW GAME",
                     new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
+                        public void onClick(DialogInterface dialog, int which) {
                             Intent intent = new Intent(getContext(), MainActivity.class);
                             ContextCompat.startActivity(getContext(), intent, null);
                         }

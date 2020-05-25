@@ -20,14 +20,11 @@ public class DrawLines extends View {
     }
 
     private void init() {
-        p = new Paint();
+
         p1 = new Paint();
-        p1.setColor(Color.BLACK);
-        p1.setStrokeWidth(4);
+        p1.setColor(Color.YELLOW);
+        p1.setStrokeWidth(10);
         p1.setStyle(Paint.Style.STROKE);
-        p1.setStrokeWidth(4);
-        p.setColor(Color.YELLOW);
-        p.setStrokeWidth(20);
     }
 
     @Override
