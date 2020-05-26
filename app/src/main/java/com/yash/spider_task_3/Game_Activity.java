@@ -64,4 +64,10 @@ public class Game_Activity extends AppCompatActivity {
         super.onStop();
         finish();
     }
+
+    public void newGame(View view) {
+        Intent intent = new Intent(Game_Activity.this,MainActivity.class);
+        startActivity(intent);
+        finish();
+    }
 }

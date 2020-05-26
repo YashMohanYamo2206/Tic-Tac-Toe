@@ -61,6 +61,15 @@ public class draw_cross_circle extends View {
 
                     if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
                         //Toast.makeText(getContext(), k + " , " + l, Toast.LENGTH_SHORT).show();
+                        MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
+                        mp.start();
+                        mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                            @Override
+                            public void onCompletion(MediaPlayer mp) {
+                                mp.reset();
+                                mp.release();
+                            }
+                        });
                         if (Game_Activity.count_moves % 2 == 0) {
                             Game_Activity.moves[k][l] = 1;
                             canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
@@ -84,6 +93,15 @@ public class draw_cross_circle extends View {
                         int l = (int) ((j - game_relativeLayout.getHeight() / 4f) / (game_relativeLayout.getHeight() / 6f));
 
                         if (x_touch_coordinate > i && x_touch_coordinate < i + ((game_relativeLayout.getWidth() - 100) / 3f) && y_touch_coordinate > j && y_touch_coordinate < j + (game_relativeLayout.getHeight() / 6f) && Game_Activity.moves[k][l] == 0) {
+                            MediaPlayer mp = MediaPlayer.create(getContext(), R.raw.lineclick);
+                            mp.start();
+                            mp.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                                @Override
+                                public void onCompletion(MediaPlayer mp) {
+                                    mp.reset();
+                                    mp.release();
+                                }
+                            });
                             if (Game_Activity.count_moves % 2 == 0) {
                                 Game_Activity.moves[k][l] = 1;
                                 canvas.drawCircle((i + ((game_relativeLayout.getWidth() - 100) / 3f) / 2f), (j + (game_relativeLayout.getHeight() / 6f) / 2f), 100, p[0]);
@@ -172,6 +190,15 @@ public class draw_cross_circle extends View {
                                 ContextCompat.startActivity(getContext(), intent, null);
                             }
                         });
+                dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), Game_Activity.class);
+                        intent.putExtra("p1_name", Game_Activity.p1_Name);
+                        intent.putExtra("p2_name", Game_Activity.p2_Name);
+                        ContextCompat.startActivity(getContext(), intent, null);
+                    }
+                });
                 AlertDialog alertDialog = dialog.create();
                 alertDialog.setCancelable(false);
                 alertDialog.show();
@@ -211,6 +238,15 @@ public class draw_cross_circle extends View {
                                 ContextCompat.startActivity(getContext(), intent, null);
                             }
                         });
+                dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Intent intent = new Intent(getContext(), Game_Activity.class);
+                        intent.putExtra("p1_name", Game_Activity.p1_Name);
+                        intent.putExtra("p2_name", Game_Activity.p2_Name);
+                        ContextCompat.startActivity(getContext(), intent, null);
+                    }
+                });
                 AlertDialog alertDialog = dialog.create();
                 alertDialog.setCancelable(false);
                 alertDialog.show();
@@ -250,6 +286,15 @@ public class draw_cross_circle extends View {
                             ContextCompat.startActivity(getContext(), intent, null);
                         }
                     });
+            dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(), Game_Activity.class);
+                    intent.putExtra("p1_name", Game_Activity.p1_Name);
+                    intent.putExtra("p2_name", Game_Activity.p2_Name);
+                    ContextCompat.startActivity(getContext(), intent, null);
+                }
+            });
             AlertDialog alertDialog = dialog.create();
             alertDialog.setCancelable(false);
             alertDialog.show();
@@ -285,6 +330,15 @@ public class draw_cross_circle extends View {
                             ContextCompat.startActivity(getContext(), intent, null);
                         }
                     });
+            dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(), Game_Activity.class);
+                    intent.putExtra("p1_name", Game_Activity.p1_Name);
+                    intent.putExtra("p2_name", Game_Activity.p2_Name);
+                    ContextCompat.startActivity(getContext(), intent, null);
+                }
+            });
             AlertDialog alertDialog = dialog.create();
             alertDialog.setCancelable(false);
             alertDialog.show();
@@ -315,6 +369,15 @@ public class draw_cross_circle extends View {
                             ContextCompat.startActivity(getContext(), intent, null);
                         }
                     });
+            dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Intent intent = new Intent(getContext(), Game_Activity.class);
+                    intent.putExtra("p1_name", Game_Activity.p1_Name);
+                    intent.putExtra("p2_name", Game_Activity.p2_Name);
+                    ContextCompat.startActivity(getContext(), intent, null);
+                }
+            });
             AlertDialog alertDialog = dialog.create();
             alertDialog.setCancelable(false);
             alertDialog.show();

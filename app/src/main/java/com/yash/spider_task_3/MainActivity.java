@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    EditText p1_name, p2_name;
+    EditText p1_name, p2_name,p_name;
     public static boolean isSinglePlayer = false;
 
     @Override
@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         p1_name = findViewById(R.id.et_player_1_name);
         p2_name = findViewById(R.id.et_player_2_name);
+        p_name=findViewById(R.id.et_player_name);
     }
 
     public void multiPlayer(View view) {
@@ -42,17 +43,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void singlePlayer(View view) {
-        if (!String.valueOf(p1_name.getText()).equals("")) {
+        if (!String.valueOf(p_name.getText()).equals("")) {
             isSinglePlayer = true;
             Intent intent = new Intent(MainActivity.this, Game_Activity.class);
-            intent.putExtra("p1_name", String.valueOf(p1_name.getText()));
+            intent.putExtra("p1_name", String.valueOf(p_name.getText()));
             intent.putExtra("p2_name", "COMPUTER");
             startActivity(intent);
             finish();
         }
-        if (String.valueOf(p1_name.getText()).equals("")) {
+        if (String.valueOf(p_name.getText()).equals("")) {
             Toast.makeText(this, "fill everything required", Toast.LENGTH_SHORT).show();
-            p1_name.setError("can't be empty");
+            p_name.setError("can't be empty");
         }
     }
 }

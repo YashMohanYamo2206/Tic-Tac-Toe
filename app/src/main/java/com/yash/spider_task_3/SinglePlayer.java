@@ -6,9 +6,9 @@ public class SinglePlayer {
     }
 
     ;
-    static int player = 2, opponent = 1;
+    private static int player = 2, opponent = 1;
 
-    static Boolean isMovesLeft(int[][] board) {
+    private static Boolean isMovesLeft(int[][] board) {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)
                 if (board[i][j] == 0)
@@ -16,7 +16,7 @@ public class SinglePlayer {
         return false;
     }
 
-    static int evaluate(int[][] b) {
+    private static int evaluate(int[][] b) {
         for (int row = 0; row < 3; row++) {
             if (b[row][0] == b[row][1] &&
                     b[row][1] == b[row][2]) {

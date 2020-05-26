@@ -3,48 +3,86 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/tictactoebg2"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <TextView
+        android:background="@drawable/button2"
+        android:layout_width="380sp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100sp"
-        android:orientation="horizontal">
+        android:layout_marginTop="20sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:gravity="center"
+        android:text="TIC TAC TOE"
+        android:textSize="40sp" />
+    <LinearLayout
+        android:layout_width="340sp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="140sp"
+        android:background="@drawable/button"
+        android:orientation="vertical"
+        android:padding="20sp">
 
-        <EditText
-            android:id="@+id/et_player_1_name"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="50sp"
-            android:hint="player_1_name" />
+            android:layout_centerHorizontal="true"
+            android:orientation="horizontal">
 
-        <EditText
-            android:id="@+id/et_player_2_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="player_2_name" />
+            <EditText
+                android:textColorHint="#000"
+                android:id="@+id/et_player_1_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40sp"
+                android:hint="player 1 name" />
+
+            <EditText
+                android:textColorHint="#000"
+                android:id="@+id/et_player_2_name"
+                android:layout_width="150sp"
+                android:layout_height="wrap_content"
+                android:hint="player 2 name" />
+
+        </LinearLayout>
+
+        <Button
+            android:layout_gravity="center"
+            android:background="#ffa500"
+            android:layout_width="200sp"
+            android:layout_height="60sp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40sp"
+            android:onClick="multiPlayer"
+            android:text="multiPlayer"/>
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="320sp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
-        android:orientation="vertical">
+        android:layout_marginBottom="150sp"
+        android:background="@drawable/button"
+        android:orientation="vertical"
+        android:padding="20sp">
+
+        <EditText
+            android:textColorHint="#000"
+            android:id="@+id/et_player_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10sp"
+            android:hint="player name" />
 
         <Button
-            android:layout_width="300sp"
-            android:layout_height="80sp"
-            android:layout_marginBottom="80sp"
-            android:onClick="multiPlayer"
-            android:text="multiPlayer">
-
-        </Button>
-
-        <Button
-            android:layout_width="300sp"
-            android:layout_height="80sp"
+            android:layout_gravity="center"
+            android:background="#ffa500"
+            android:layout_width="200sp"
+            android:layout_height="60sp"
             android:onClick="singlePlayer"
             android:text="Single player">
 

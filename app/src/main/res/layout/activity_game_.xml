@@ -36,4 +36,14 @@
             android:text="player_2_name"
             android:textSize="25sp" />
     </LinearLayout>
+    <Button
+        android:onClick="newGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="60sp"
+        android:background="#d5e29f"
+        android:textColor="#1f2212"
+        android:text="new game"/>
 </RelativeLayout>

@@ -6,9 +6,11 @@
         android:allowBackup="true"
         android:icon="@mipmap/tictactoeicon"
         android:label="Tic-Tac-Toe"
+        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/tictactoeicon"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:fullBackupContent="true">
         <activity android:name=".splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
