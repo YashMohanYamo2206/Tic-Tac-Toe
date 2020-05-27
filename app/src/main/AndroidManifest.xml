@@ -4,13 +4,14 @@
 
     <application
         android:allowBackup="true"
+        android:fullBackupContent="true"
         android:icon="@mipmap/tictactoeicon"
         android:label="Tic-Tac-Toe"
-        android:screenOrientation="portrait"
         android:roundIcon="@mipmap/tictactoeicon"
+        android:screenOrientation="portrait"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:fullBackupContent="true">
+        android:theme="@style/AppTheme">
+        <activity android:name=".score" />
         <activity android:name=".splash_screen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -20,6 +21,7 @@
         </activity>
         <activity android:name=".Game_Activity" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".item" />
     </application>
 
 </manifest>

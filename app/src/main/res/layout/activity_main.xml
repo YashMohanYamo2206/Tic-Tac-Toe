@@ -89,4 +89,14 @@
         </Button>
 
     </LinearLayout>
+    <Button
+        android:onClick="SCORE"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="40sp"
+        android:text="score"
+        android:background="#b6bbe2"
+        android:textColor="#000"/>
 </RelativeLayout>

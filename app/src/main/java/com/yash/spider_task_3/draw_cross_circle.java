@@ -157,6 +157,11 @@ public class draw_cross_circle extends View {
         for (int i = 0; i < 3; i++) {
             if ((Game_Activity.moves[i][0] == (Game_Activity.moves[i][1])) && (Game_Activity.moves[i][1] == (Game_Activity.moves[i][2])) && Game_Activity.moves[i][0] != 0) {
                 final int k = Game_Activity.moves[i][0];
+                if (k == 1) {
+                    Game_Activity.Winner = Game_Activity.p1_Name;
+                } else if (k == 2) {
+                    Game_Activity.Winner = Game_Activity.p2_Name;
+                }
                 tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
                     @Override
                     public void onInit(int status) {
@@ -166,48 +171,23 @@ public class draw_cross_circle extends View {
                                     result == TextToSpeech.LANG_NOT_SUPPORTED) {
                                 Toast.makeText(getContext(), "weird name", Toast.LENGTH_SHORT).show();
                             } else {
-                                if (k == 1) {
-
-                                    tts.speak(Game_Activity.p1_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                                } else if (k == 2) {
-                                    tts.speak(Game_Activity.p2_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                                }
+                                tts.speak(Game_Activity.Winner + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
                             }
                         } else
                             Log.e("error", "Initilization Failed!");
                     }
                 });
-
-
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setMessage("winner is player -" + Game_Activity.moves[i][0]);
-                dialog.setTitle("WINNER");
-                dialog.setPositiveButton("NEW GAME",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                Intent intent = new Intent(getContext(), MainActivity.class);
-                                ContextCompat.startActivity(getContext(), intent, null);
-                            }
-                        });
-                dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getContext(), Game_Activity.class);
-                        intent.putExtra("p1_name", Game_Activity.p1_Name);
-                        intent.putExtra("p2_name", Game_Activity.p2_Name);
-                        ContextCompat.startActivity(getContext(), intent, null);
-                    }
-                });
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.setCancelable(false);
-                alertDialog.show();
-                return;
+                Game_Activity.GameOver(getContext());
             }
         }
         for (int i = 0; i < 3; i++) {
             if ((Game_Activity.moves[0][i] == (Game_Activity.moves[1][i])) && (Game_Activity.moves[1][i] == (Game_Activity.moves[2][i])) && Game_Activity.moves[0][i] != 0) {
                 final int k = Game_Activity.moves[0][i];
+                if (k == 1) {
+                    Game_Activity.Winner = Game_Activity.p1_Name;
+                } else if (k == 2) {
+                    Game_Activity.Winner = Game_Activity.p2_Name;
+                }
                 tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
                     @Override
                     public void onInit(int status) {
@@ -217,44 +197,22 @@ public class draw_cross_circle extends View {
                                     result == TextToSpeech.LANG_NOT_SUPPORTED) {
                                 Toast.makeText(getContext(), "weird name", Toast.LENGTH_SHORT).show();
                             } else {
-                                if (k == 1) {
-                                    tts.speak(Game_Activity.p1_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                                } else if (k == 2) {
-                                    tts.speak(Game_Activity.p2_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                                }
+                                tts.speak(Game_Activity.Winner + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
                             }
                         } else
                             Log.e("error", "Initilization Failed!");
                     }
                 });
-                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-                dialog.setMessage("winner is player -" + Game_Activity.moves[0][i]);
-                dialog.setTitle("WINNER");
-                dialog.setPositiveButton("NEW GAME",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,
-                                                int which) {
-                                Intent intent = new Intent(getContext(), MainActivity.class);
-                                ContextCompat.startActivity(getContext(), intent, null);
-                            }
-                        });
-                dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Intent intent = new Intent(getContext(), Game_Activity.class);
-                        intent.putExtra("p1_name", Game_Activity.p1_Name);
-                        intent.putExtra("p2_name", Game_Activity.p2_Name);
-                        ContextCompat.startActivity(getContext(), intent, null);
-                    }
-                });
-                AlertDialog alertDialog = dialog.create();
-                alertDialog.setCancelable(false);
-                alertDialog.show();
-                return;
+                Game_Activity.GameOver(getContext());
             }
         }
         if ((Game_Activity.moves[0][0] == Game_Activity.moves[1][1]) && (Game_Activity.moves[1][1] == Game_Activity.moves[2][2]) && Game_Activity.moves[0][0] != 0) {
             final int k = Game_Activity.moves[0][0];
+            if (k == 1) {
+                Game_Activity.Winner = Game_Activity.p1_Name;
+            } else if (k == 2) {
+                Game_Activity.Winner = Game_Activity.p2_Name;
+            }
             tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
                 @Override
                 public void onInit(int status) {
@@ -264,42 +222,20 @@ public class draw_cross_circle extends View {
                                 result == TextToSpeech.LANG_NOT_SUPPORTED) {
                             Toast.makeText(getContext(), "weird name", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (k == 1) {
-                                tts.speak(Game_Activity.p1_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                            } else if (k == 2) {
-                                tts.speak(Game_Activity.p2_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                            }
+                            tts.speak(Game_Activity.Winner + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
                         }
                     } else
                         Log.e("error", "Initilization Failed!");
                 }
             });
-
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-            dialog.setMessage("winner is player -" + Game_Activity.moves[0][0]);
-            dialog.setTitle("WINNER");
-            dialog.setPositiveButton("NEW GAME",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            ContextCompat.startActivity(getContext(), intent, null);
-                        }
-                    });
-            dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(getContext(), Game_Activity.class);
-                    intent.putExtra("p1_name", Game_Activity.p1_Name);
-                    intent.putExtra("p2_name", Game_Activity.p2_Name);
-                    ContextCompat.startActivity(getContext(), intent, null);
-                }
-            });
-            AlertDialog alertDialog = dialog.create();
-            alertDialog.setCancelable(false);
-            alertDialog.show();
+            Game_Activity.GameOver(getContext());
         } else if ((Game_Activity.moves[0][2] == Game_Activity.moves[1][1]) && (Game_Activity.moves[1][1] == Game_Activity.moves[2][0]) && Game_Activity.moves[0][2] != 0) {
-            final int k = Game_Activity.moves[2][0];
+            final int k = Game_Activity.moves[0][2];
+            if (k == 1) {
+                Game_Activity.Winner = Game_Activity.p1_Name;
+            } else if (k == 2) {
+                Game_Activity.Winner = Game_Activity.p2_Name;
+            }
             tts = new TextToSpeech(getContext(), new TextToSpeech.OnInitListener() {
                 @Override
                 public void onInit(int status) {
@@ -309,39 +245,13 @@ public class draw_cross_circle extends View {
                                 result == TextToSpeech.LANG_NOT_SUPPORTED) {
                             Toast.makeText(getContext(), "weird name", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (k == 1) {
-                                tts.speak(Game_Activity.p1_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                            } else if (k == 2) {
-                                tts.speak(Game_Activity.p2_Name + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
-                            }
+                            tts.speak(Game_Activity.Winner + " is winner", TextToSpeech.QUEUE_FLUSH, null, null);
                         }
                     } else
                         Log.e("error", "Initilization Failed!");
                 }
             });
-            AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
-            dialog.setMessage("winner is player -" + Game_Activity.moves[0][2]);
-            dialog.setTitle("WINNER");
-            dialog.setPositiveButton("NEW GAME",
-                    new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog,
-                                            int which) {
-                            Intent intent = new Intent(getContext(), MainActivity.class);
-                            ContextCompat.startActivity(getContext(), intent, null);
-                        }
-                    });
-            dialog.setNegativeButton("REPLAY", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    Intent intent = new Intent(getContext(), Game_Activity.class);
-                    intent.putExtra("p1_name", Game_Activity.p1_Name);
-                    intent.putExtra("p2_name", Game_Activity.p2_Name);
-                    ContextCompat.startActivity(getContext(), intent, null);
-                }
-            });
-            AlertDialog alertDialog = dialog.create();
-            alertDialog.setCancelable(false);
-            alertDialog.show();
+            Game_Activity.GameOver(getContext());
 
         } else if (Game_Activity.count_moves >= 9) {
 
@@ -383,5 +293,4 @@ public class draw_cross_circle extends View {
             alertDialog.show();
         }
     }
-
 }

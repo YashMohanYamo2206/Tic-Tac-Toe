@@ -56,4 +56,9 @@ public class MainActivity extends AppCompatActivity {
             p_name.setError("can't be empty");
         }
     }
+
+    public void SCORE(View view) {
+        Intent intent = new Intent(MainActivity.this,score.class);
+        startActivity(intent);
+    }
 }
